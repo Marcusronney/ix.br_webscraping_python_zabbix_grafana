@@ -42,7 +42,7 @@ python ix.py --name "Rio de Janeiro,"
 | **IX.br status (JSON)** | Item mestre que executa o script Python e retorna o JSON completo | `ixbr.status.json` | Agente Zabbix (ativo) · **Item mestre** | — |
 | **IX.br sites** | Regra de descoberta (LLD) que transforma o JSON em lista de `{#IXNAME}` via JavaScript | `ixbr.discovery` | **Regra de descoberta** · Item dependente | IX.br status (JSON) |
 | **{#IXNAME}** | Recebe o nome através da macro `{#IXNAME}` e extrai 0/1 via JSONPath `$.["{#IXNAME}"]` | `ixbr.status[{#IXNAME}]` | **Item dependente** (Numérico sem sinal) | IX.br status (JSON) |
-| **{#IXNAME} indisponível** | Trigger protótipo: alerta quando o valor do item é 0 (Indisponível) | *(expressão)* `last(/Template IX.br Status/ixbr.status[{#IXNAME}],#1)=0` | **Trigger protótipo** | IX.br status (JSON) |
+| **{#IXNAME} indisponível** | Trigger protótipo: alerta quando o valor do item é 0 (Indisponível) | *(expressão)* `last(/Status IX.BR/ixbr.status[{#IXNAME}])=0` | **Trigger protótipo** | IX.br status (JSON) |
 | **Status IX.br** | Mapeamento de valor: `0 → Indisponível`, `1 → Operacional` | — | **Value mapping** | — |
 
 
