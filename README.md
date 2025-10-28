@@ -35,24 +35,22 @@ python ix.py --name "Rio de Janeiro,"
 
 ---------------------------------
 
-# TEMPLATE
+# Template IX.br Status — Itens, LLD e Tigger
+
+| Nome | Descrição | Key | Tipo | Item Mestre |
+|---|---|---|---|---|
+| **IX.br status (JSON)** | Item mestre que executa o script Python e retorna o JSON completo | `ixbr.status.json` | Agente Zabbix (ativo) · **Item mestre** | — |
+| **IX.br sites** | Regra de descoberta (LLD) que transforma o JSON em lista de `{#IXNAME}` via JavaScript | `ixbr.discovery` | **Regra de descoberta** · Item dependente | IX.br status (JSON) |
+| **{#IXNAME}** | Recebe o nome através da macro `{#IXNAME}` e extrai 0/1 via JSONPath `$.["{#IXNAME}"]` | `ixbr.status[{#IXNAME}]` | **Item dependente** (Numérico sem sinal) | IX.br status (JSON) |
+| **{#IXNAME} indisponível** | Trigger protótipo: alerta quando o valor do item é 0 (Indisponível) | *(expressão)* `last(/Template IX.br Status/ixbr.status[{#IXNAME}],#1)=0` | **Trigger protótipo** | IX.br status (JSON) |
+| **Status IX.br** | Mapeamento de valor: `0 → Indisponível`, `1 → Operacional` | — | **Value mapping** | — |
+
 
 ### Item
 
 ![lld](imagens/item.png)
 
-| Nome | Descrição | Key | Tipo | Intervalo de Atualização |
-| - | - | - |
-| IX.br status (JSON) | Coleta o Json do ix.py | ixbr.status.json | Zabbix Agent | 10m |
-
-
-### Status IX.BR - Low-Level Discovery Rule (LLD)
-
 ![lld](imagens/lld.png)
-
-| Nome | Descrição | Key | Tipo | Item Mestre |
-| - | - | - |
-| IX.br sites | LLD para receber todos os sites do python em formato Json e sair via variável #IXNAME | ixbr.discovery | Item Dependente | IX.br status (JSON) |
 
 Pré-Processamento JavaScript: Transforma o JSON bruto do item mestre em um array de descobertas.
 ````
@@ -68,22 +66,11 @@ return JSON.stringify({ data: data });
 
 ![lldjavascript](imagens/javascript.png)
 
-
-### Protótipo de item
-
 ![prototipo](imagens/prototipoitem.png)
-
-Nome	Descrição	Key	Tipo	Item Mestre
-IX.br status (JSON)	Item mestre que executa o script Python e retorna o JSON completo	ixbr.status.json	Agente Zabbix (ativo) · Item mestre	—
-IX.br sites	Regra de descoberta (LLD) que transforma o JSON em lista de {#IXNAME} via JavaScript	ixbr.discovery	Regra de descoberta · Item dependente	IX.br status (JSON)
-{#IXNAME}	Recebe o nome através da macro {#IXNAME} e extrai 0/1 via JSONPath $.["{#IXNAME}"]	ixbr.status[{#IXNAME}]	Item dependente (Numérico sem sinal)	IX.br status (JSON)
-{#IXNAME} indisponível	Trigger protótipo: alerta quando o valor do item é 0 (Indisponível)	(expressão) last(/Template IX.br Status/ixbr.status[{#IXNAME}],#1)=0	Trigger protótipo	IX.br status (JSON)
-Status IX.br	Mapeamento de valor: 0 → Indisponível, 1 → Operacional	—	Value mapping	—
-
 
 ![prototipo2](imagens/prototipoitem2.png)
 
-
+Após a importação do Template no host, realize os testes.
 
 Teste a saída via **zabbix_get** com a váriavel definida no Userparaments.
 ````
