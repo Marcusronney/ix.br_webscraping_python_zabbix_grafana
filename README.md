@@ -35,7 +35,7 @@ zabbix_get -s 127.0.0.1 -k ixbr.status
 
 # Dashboard Grafana
 
-Grafana Lan:
+Grafana Lab: https://grafana.com/orgs/marcusronney/dashboards
 
 ![Dashboard](dashboard_grafana/dashboard_ix.png)
 
