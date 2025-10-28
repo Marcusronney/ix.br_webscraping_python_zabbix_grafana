@@ -85,3 +85,7 @@ Também podemos rodar diretamente o script no servidor Zabbix.
 ````
 
 ![test2](imagens/test2.png)
+
+# Host IX.BR
+
+![host](imagens/host.png)
