@@ -1,0 +1,72 @@
+zabbix_export:
+  version: '7.4'
+  template_groups:
+    - uuid: 7df96b18c230490a9a0a9e2307226338
+      name: Templates
+  templates:
+    - uuid: fae9fae5c4464eb0adaebb1e3861e4fd
+      template: 'Status IX.BR'
+      name: 'Status IX.BR'
+      description: |
+        Objetivo: monitorar o status do IX.br com um script Python e integrar a coleta ao Zabbix e Grafana.
+        
+        Criado por Marcus Rônney
+        
+        Linkedin: https://www.linkedin.com/in/marcus-r%C3%B4nney-627657bb/
+      groups:
+        - name: Templates
+      items:
+        - uuid: 8bd2929a25b54a298c81f13965bb569b
+          name: 'IX.br status (JSON)'
+          key: ixbr.status.json
+          delay: 10m
+          value_type: TEXT
+          description: 'Coleta o Json do ix.py'
+      discovery_rules:
+        - uuid: 126a6bee60a346e6baa18892639c9577
+          name: 'IX.br sites'
+          type: DEPENDENT
+          key: ixbr.discovery
+          item_prototypes:
+            - uuid: a8cf6515577b4a368c96405310051cdf
+              name: '{#IXNAME}'
+              type: DEPENDENT
+              key: 'ixbr.status[{#IXNAME}]'
+              history: 7d
+              trends: 60d
+              description: 'Recebe o nome através da macro {#IXNAME}'
+              valuemap:
+                name: Status
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - '$.["{#IXNAME}"]'
+              master_item:
+                key: ixbr.status.json
+              trigger_prototypes:
+                - uuid: ffa491eb37ff474fb107492412582e4c
+                  expression: 'last(/Status IX.BR/ixbr.status[{#IXNAME}])=0'
+                  name: '{#IXNAME} indisponível'
+                  priority: INFO
+          master_item:
+            key: ixbr.status.json
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - |
+                  var obj = JSON.parse(value);
+                  var data = [];
+                  for (var k in obj) {
+                    if (Object.prototype.hasOwnProperty.call(obj, k)) {
+                      data.push({ "{#IXNAME}": k });
+                    }
+                  }
+                  return JSON.stringify({ data: data });
+      valuemaps:
+        - uuid: d052785cc79740b398495b9789e9b3f7
+          name: Status
+          mappings:
+            - value: '0'
+              newvalue: Indisponível
+            - value: '1'
+              newvalue: Operacional

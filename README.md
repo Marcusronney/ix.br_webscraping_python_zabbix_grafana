@@ -1,14 +1,23 @@
 # ix.br_webscraping_python_zabbix_grafana
 Monitorando Status do IX.BR com python e integrando ao Zabbix e Grafana.
 
+Este repositório foi criado com o objetivo de monitorar o status do [IX.br](https://status.ix.br/) com um script Python e integrar a coleta ao Zabbix e Grafana. 
 
+### ix.py
 
-Seguindo as boas práticas do Zabbix, o script será armazenado dentro de **externalscripts**
+O script acessa a página  [IX.br](https://status.ix.br/), faz web scraping e consolida cada local/serviço com um valor binário (0 = indisponível, 1 = operacional) e envia um JSON para o zabbix coletar via LLD
+
+**exemplo**: python3 ix.py --json — retorna um objeto JSON com pares "Nome": 0|1. 
+
+# Deploy
+
+Seguindo as boas práticas do Zabbix, o script será armazenado dentro de */lib/zabbix/externalscripts/*
 
 Permissão de Execução
 ````
 chmod +x /lib/zabbix/externalscripts/python_ix/ix.py
 ````
+**Execute o script manualmente e verifique a saída.**
 
 Saída manual
 ````
