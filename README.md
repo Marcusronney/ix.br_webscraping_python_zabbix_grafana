@@ -15,7 +15,7 @@ Saída manual
 python3 ix.py
 ````
 
-![ix](imagens\ix.py.png)
+![ix](imagens/ix.py.png)
 
 
 Saída Json
@@ -23,7 +23,7 @@ Saída Json
 python ix.py --json
 ````
 
-![ixjson](imagens\ix.py_json.png)
+![ixjson](imagens/ix.py_json.png)
 
 
 Saída Seletiva
@@ -31,7 +31,7 @@ Saída Seletiva
 python ix.py --name "Rio de Janeiro,"
 ````
 
-![ixname](imagens\ix_name.png)
+![ixname](imagens/ix_name.png)
 
 
 ### Zabbix - Low-Level Discovery Rule (LLD)
