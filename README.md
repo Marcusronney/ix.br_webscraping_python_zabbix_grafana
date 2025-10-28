@@ -37,62 +37,61 @@ python ix.py --name "Rio de Janeiro,"
 
 # TEMPLATE
 
-### Zabbix - Low-Level Discovery Rule (LLD)
+### Item
+
+![lld](imagens/item.png)
+
+| Nome | Descrição | Key | Tipo | Intervalo de Atualização |
+| - | - | - |
+| IX.br status (JSON) | Coleta o Json do ix.py | ixbr.status.json | Zabbix Agent | 10m |
+
+
+### Status IX.BR - Low-Level Discovery Rule (LLD)
+
+![lld](imagens/lld.png)
+
+| Nome | Descrição | Key | Tipo | Item Mestre |
+| - | - | - |
+| IX.br sites | LLD para receber todos os sites do python em formato Json e sair via variável #IXNAME | ixbr.discovery | Item Dependente | IX.br status (JSON) |
+
+Pré-Processamento JavaScript: Transforma o JSON bruto do item mestre em um array de descobertas.
+````
+var obj = JSON.parse(value);
+var data = [];
+for (var k in obj) {
+  if (Object.prototype.hasOwnProperty.call(obj, k)) {
+    data.push({ "{#IXNAME}": k });
+  }
+}
+return JSON.stringify({ data: data });
+````
+
+![lldjavascript](imagens/javascript.png)
+
+
+### Protótipo de item
+
+![prototipo](imagens/prototipoitem.png)
+
+| Nome | Descrição | Key | Tipo | Item Mestre |
+| - | - | - |
+| {#IXNAME} | Recebe o nome através da macro {#IXNAME} | ixbr.status[{#IXNAME}] | Item Dependente | IX.br status (JSON) |
+
+
+![prototipo2](imagens/prototipoitem2.png)
 
 
 
+Teste a saída via **zabbix_get** com a váriavel definida no Userparaments.
+````
+zabbix_get -s 127.0.0.1 -k ixbr.statuss
+````
 
-Discovery rules
-Name	Description	Type	Key and additional info
-Interfaces	
--
+![teste](imagens/teste.png)
 
-SNMP agent	interfaces.discovery
-Update: 3600
+Também podemos rodar diretamente o script no servidor Zabbix.
+````
+/usr/bin/python3 /lib/zabbix/externalscripts/python_ix/ix.py | jq .
+````
 
-Memory Useage	
--
-
-SNMP agent	memoryusage.discovery
-Update: 3600
-
-Mac Address	
--
-
-SNMP agent	macaddress.discovery
-Update: 3600
-
-Temperature Discovery	
-Discovering modules temperature (same filter as in Module Discovery) plus and temperature sensors
-
-SNMP agent	temp.discovery
-Update: 3600
-
-CPU	
--
-
-SNMP agent	cpu.discovery
-Update: 3600
-
-Fan Discovery	
-Discovering all entities of PhysicalClass - 7: fan(7)
-
-SNMP agent	fan.discovery
-Update: 3600
-
-Entity Discovery	
--
-
-SNMP agent	entity.discovery
-Update: 3600
-
-PSU Discovery	
-Discovering all entities of PhysicalClass - 6: powerSupply(6)
-
-SNMP agent	psu.discovery
-Update: 3600
-
-
-
-
-
+![test2](imagens/test2.png)
