@@ -1,0 +1,767 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Dashboard para monitoramento dos status das localidades dos links em https://status.ix.br/\nMarcus Rônney\n\nLinkedin: https://www.linkedin.com/in/marcus-r%C3%B4nney-627657bb/",
+  "editable": false,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 119,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "ff0c9851-3e76-4a55-8101-b75eb2ec5f34"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "yellow",
+                  "index": 1,
+                  "text": "Indisponibilidade Parcial"
+                },
+                "1": {
+                  "color": "dark-green",
+                  "index": 0,
+                  "text": "Disponível"
+                },
+                "2": {
+                  "color": "dark-red",
+                  "index": 2,
+                  "text": "Indisponivel"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 7,
+        "x": 0,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "text": {
+          "titleSize": 12,
+          "valueSize": 8
+        },
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.6",
+      "targets": [
+        {
+          "application": {
+            "filter": ""
+          },
+          "countTriggersBy": "",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "ff0c9851-3e76-4a55-8101-b75eb2ec5f34"
+          },
+          "evaltype": "0",
+          "functions": [],
+          "group": {
+            "filter": "/./"
+          },
+          "hide": false,
+          "host": {
+            "filter": "$ix"
+          },
+          "item": {
+            "filter": "/./"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "true",
+            "useZabbixValueMapping": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "0",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "schema": 12,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "textFilter": "",
+          "trigger": {
+            "filter": ""
+          }
+        }
+      ],
+      "title": "IX-br - São Paulo, SP",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "byVariable": false,
+            "include": {
+              "names": [
+                "Matriz de Comutação - IX.br São Paulo, SP",
+                "Route Servers - IX.br São Paulo, SP",
+                "Looking Glass - IX.br São Paulo, SP"
+              ]
+            }
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "^IX\\.br\\s+(.*)$",
+            "renamePattern": "$1"
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "ff0c9851-3e76-4a55-8101-b75eb2ec5f34"
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 10,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Ix.br.svg/2560px-Ix.br.svg.png\" height=\"100%\" width=\"100%\">\n\n\n\n\n",
+        "mode": "html"
+      },
+      "pluginVersion": "10.2.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "ff0c9851-3e76-4a55-8101-b75eb2ec5f34"
+          },
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "ff0c9851-3e76-4a55-8101-b75eb2ec5f34"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "yellow",
+                  "index": 1,
+                  "text": "Indisponibilidade Parcial"
+                },
+                "1": {
+                  "color": "dark-green",
+                  "index": 0,
+                  "text": "Disponível"
+                },
+                "2": {
+                  "color": "dark-red",
+                  "index": 2,
+                  "text": "Indisponivel"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          },
+          "unit": "string"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 7,
+        "x": 17,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "text": {
+          "titleSize": 12,
+          "valueSize": 8
+        },
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.6",
+      "targets": [
+        {
+          "application": {
+            "filter": ""
+          },
+          "countTriggersBy": "",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "ff0c9851-3e76-4a55-8101-b75eb2ec5f34"
+          },
+          "evaltype": "0",
+          "functions": [],
+          "group": {
+            "filter": "/./"
+          },
+          "hide": false,
+          "host": {
+            "filter": "$ix"
+          },
+          "item": {
+            "filter": "/./"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "true",
+            "useZabbixValueMapping": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "0",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "schema": 12,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "textFilter": "",
+          "trigger": {
+            "filter": ""
+          }
+        }
+      ],
+      "title": "IX-br - Fortaleza, CE",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "byVariable": false,
+            "include": {
+              "names": [
+                "Matriz de Comutação - IX.br Fortaleza, CE",
+                "Route Servers - IX.br Fortaleza, CE",
+                "Looking Glass - IX.br Fortaleza, CE"
+              ]
+            }
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "^IX\\.br\\s+(.*)$",
+            "renamePattern": "$1"
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "ff0c9851-3e76-4a55-8101-b75eb2ec5f34"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "semi-dark-yellow",
+                  "index": 1,
+                  "text": "Indisponibilidade Parcial"
+                },
+                "1": {
+                  "color": "dark-green",
+                  "index": 0,
+                  "text": "Disponível"
+                },
+                "2": {
+                  "color": "dark-red",
+                  "index": 2,
+                  "text": "Indisponivel"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          },
+          "unit": "string"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 10,
+        "x": 7,
+        "y": 3
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "text": {
+          "titleSize": 12,
+          "valueSize": 8
+        },
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.6",
+      "targets": [
+        {
+          "application": {
+            "filter": ""
+          },
+          "countTriggersBy": "",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "ff0c9851-3e76-4a55-8101-b75eb2ec5f34"
+          },
+          "evaltype": "0",
+          "functions": [],
+          "group": {
+            "filter": "/./"
+          },
+          "hide": false,
+          "host": {
+            "filter": "$ix"
+          },
+          "item": {
+            "filter": "/./"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "true",
+            "useZabbixValueMapping": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "0",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "schema": 12,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "textFilter": "",
+          "trigger": {
+            "filter": ""
+          }
+        }
+      ],
+      "title": "IX-br - Rio de Janeiro, RJ",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "byVariable": false,
+            "include": {
+              "names": [
+                "Matriz de Comutação - IX.br Rio de Janeiro, RJ",
+                "Route Servers - IX.br Rio de Janeiro, RJ",
+                "Looking Glass - IX.br Rio de Janeiro, RJ"
+              ]
+            }
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "^IX\\.br\\s+(.*)$",
+            "renamePattern": "$1"
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "alexanderzobnin-zabbix-datasource",
+        "uid": "ff0c9851-3e76-4a55-8101-b75eb2ec5f34"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "yellow",
+                  "index": 1,
+                  "text": "Indisponibilidade Parcial"
+                },
+                "1": {
+                  "color": "dark-green",
+                  "index": 0,
+                  "text": "Disponível"
+                },
+                "2": {
+                  "color": "dark-red",
+                  "index": 2,
+                  "text": "Indisponivel"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 1,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "text": {
+          "titleSize": 12,
+          "valueSize": 8
+        },
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.6",
+      "targets": [
+        {
+          "application": {
+            "filter": ""
+          },
+          "countTriggersBy": "",
+          "datasource": {
+            "type": "alexanderzobnin-zabbix-datasource",
+            "uid": "ff0c9851-3e76-4a55-8101-b75eb2ec5f34"
+          },
+          "evaltype": "0",
+          "functions": [],
+          "group": {
+            "filter": "/./"
+          },
+          "hide": false,
+          "host": {
+            "filter": "$ix"
+          },
+          "item": {
+            "filter": "/./"
+          },
+          "itemTag": {
+            "filter": ""
+          },
+          "macro": {
+            "filter": ""
+          },
+          "options": {
+            "count": false,
+            "disableDataAlignment": false,
+            "showDisabledItems": false,
+            "skipEmptyValues": false,
+            "useTrends": "true",
+            "useZabbixValueMapping": false
+          },
+          "proxy": {
+            "filter": ""
+          },
+          "queryType": "0",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "schema": 12,
+          "table": {
+            "skipEmptyValues": false
+          },
+          "tags": {
+            "filter": ""
+          },
+          "textFilter": "",
+          "trigger": {
+            "filter": ""
+          }
+        }
+      ],
+      "title": "IX-br - Outras Localidades",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "byVariable": false,
+            "include": {
+              "names": [
+                "Matriz de Comutação - IX.br São Paulo, SP",
+                "IX.br Aracaju, SE",
+                "IX.br Belém, PA Indisponibilidade parcial",
+                "IX.br Belo Horizonte, MG",
+                "IX.br Boa Vista, RR",
+                "IX.br Brasília, DF",
+                "IX.br Campina Grande, PB",
+                "IX.br Campinas, SP",
+                "IX.br Campo Grande, MS",
+                "IX.br Caruaru, PE",
+                "IX.br Cascavel, PR",
+                "IX.br Caxias do Sul, RS",
+                "IX.br Cuiabá, MT",
+                "IX.br Curitiba, PR Indisponibilidade parcial",
+                "IX.br Feira de Santana, BA",
+                "IX.br Florianópolis, SC",
+                "IX.br Foz do Iguaçu, RS",
+                "IX.br Goiania, GO",
+                "IX.br João Pessoa, PB",
+                "IX.br Lajeado, RS",
+                "IX.br Londrina, PR",
+                "IX.br Maceió, AL",
+                "IX.br Manaus, AM",
+                "IX.br Maringá, PR",
+                "IX.br Natal, RN",
+                "IX.br Palmas, TO",
+                "IX.br Porto Alegre, RS",
+                "IX.br Porto Velho, RO",
+                "IX.br Recife, PE",
+                "IX.br Ribeirão Preto, SP",
+                "IX.br Rio Branco, AC",
+                "IX.br Salvador, BA",
+                "IX.br Santa Maria, RS",
+                "IX.br São José do Rio Preto, SP",
+                "IX.br São Luis, MA",
+                "IX.br Teresina, PI",
+                "IX.br Vitoria, ES"
+              ]
+            }
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "^IX\\.br\\s+(.*)$",
+            "renamePattern": "$1"
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "Rede",
+    "IX"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "IX.BR",
+          "value": "IX.BR"
+        },
+        "datasource": {
+          "type": "alexanderzobnin-zabbix-datasource",
+          "uid": "ff0c9851-3e76-4a55-8101-b75eb2ec5f34"
+        },
+        "definition": "Zabbix - host",
+        "description": "Host do zabbix",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "ix",
+        "options": [],
+        "query": {
+          "application": "",
+          "group": "/.*/",
+          "host": "IX.BR",
+          "item": "",
+          "itemTag": "",
+          "queryType": "host"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": true,
+    "refresh_intervals": [
+      "10m"
+    ]
+  },
+  "timezone": "",
+  "title": "IX.BR Status",
+  "uid": "a007d850-617a-4d78-bcd4-a17a9b38a52b",
+  "version": 17,
+  "weekStart": ""
+}

@@ -33,6 +33,11 @@ zabbix_get -s 127.0.0.1 -k ixbr.status
 /usr/bin/python3 /lib/zabbix/externalscripts/python_ix/ix.py | jq
 ````
 
+# Dashboard Grafana
+
+Grafana Lan:
+
+![Dashboard](dashboard_grafana/dashboard_ix.png)
 
 
 # Deploy
